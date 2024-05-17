@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 (async () => {
-  const db = await mongoose.connect("mongodb://localhost:27017/web-suyai", {
+  const db = await mongoose.connect(process.env.DBHOST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
