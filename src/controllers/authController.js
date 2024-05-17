@@ -59,7 +59,7 @@ export const signinController = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    return res.status(404).send("The email doesn't exist.");
+    return res.status(404).send("El email no existe.");
   }
 
   // Si el usuario se registró usando Google y no tiene contraseña establecida
@@ -86,7 +86,7 @@ export const signinController = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie
     });
 
-    res.status(200).send({ auth: true, message: "Login successful" });
+    res.status(200).send({ auth: true, message: "Login successfull" });
   } else {
     // En caso de que el usuario no tenga una contraseña por alguna razón no esperada
     res.status(500).send("Authentication error. Please contact support.");

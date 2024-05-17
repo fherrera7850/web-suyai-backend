@@ -11,12 +11,13 @@ export async function verifyToken(req, res, next) {
       .send({ auth: false, message: "No Token Provided" });
   }
 
-  // decode the token
-  const decoded = await jwt.verify(token, process.env.SECRET);
-
-  // save the token on request object to using on routes
-  req.userId = decoded.id;
-
-  // continue with the next function
-  next();
+  try {
+    // Intenta verificar el token
+    const decoded = jwt.verify(token, process.env.SECRET);
+    req.userId = decoded.id;
+    next();
+  } catch (error) {
+    // Maneja el error de verificación del token
+    return res.status(500).send({ auth: false, message: "Failed to authenticate token." });
+  }
 }

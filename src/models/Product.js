@@ -10,6 +10,10 @@ const productSchema = new Schema({
     enum: ['Bidones', 'Kits', 'Accesorios', 'Dispensadores Básicos', 'Dispensadores Eléctricos']
   },
   imageUrl: { type: String, required: true }, // Campo para la URL de la imagen del producto
+  isActive: {
+    type: Boolean,
+    default: true
+  },
 }, { timestamps: true });
 
 export default model("Product", productSchema);
