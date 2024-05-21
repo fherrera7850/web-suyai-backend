@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3001' // Permite solicitudes solo desde esta URL
+    origin: 'http://localhost:3000' // Permite solicitudes solo desde esta URL
 }));
 app.use(bodyParser.json()); // Asegúrate de usar body-parser para parsear JSON
 

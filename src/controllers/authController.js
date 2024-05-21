@@ -19,7 +19,7 @@ export const signupController = async (req, res) => {
       lastName,
       phone,
       address,
-      clientIdMs 
+      clientIdMs
     });
 
     // Encrypt the user's password
@@ -74,6 +74,7 @@ export const signinController = async (req, res) => {
       return res.status(401).send({ auth: false, token: null });
     }
 
+    user.password = null;
     const token = jwt.sign({ id: user._id }, process.env.SECRET, {
       expiresIn: 60 * 60 * 24, // 24 hours
     });
@@ -86,7 +87,7 @@ export const signinController = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie
     });
 
-    res.status(200).send({ auth: true, message: "Login successfull" });
+    res.status(200).send({ auth: true, message: "Login successfull", user: { id: user._id, role: user.role, firstName: user.firstName, lastName: user.lastName } });
   } else {
     // En caso de que el usuario no tenga una contraseña por alguna razón no esperada
     res.status(500).send("Authentication error. Please contact support.");
