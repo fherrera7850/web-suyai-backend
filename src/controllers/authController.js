@@ -87,6 +87,9 @@ export const signinController = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000 // Duración de la cookie
     });
 
+    //con token
+    //res.status(200).send({ auth: true, message: "Login successfull", user: { id: user._id, role: user.role, firstName: user.firstName, lastName: user.lastName, token } });
+    //sin token
     res.status(200).send({ auth: true, message: "Login successfull", user: { id: user._id, role: user.role, firstName: user.firstName, lastName: user.lastName } });
   } else {
     // En caso de que el usuario no tenga una contraseña por alguna razón no esperada
@@ -95,6 +98,11 @@ export const signinController = async (req, res) => {
 };
 
 
-export const logout = async (req, res) => {
-  res.status(200).send({ auth: false, token: null });
+export const logoutController = async (req, res) => {
+  res.cookie('token', '', {
+    httpOnly: true,
+    expires: new Date(0)  // Establece la fecha de expiración al pasado
+  });
+
+  res.send({ message: 'Logout successful' });
 };

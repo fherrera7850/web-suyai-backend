@@ -3,7 +3,7 @@ import {
   signinController,
   signupController,
   getProfile,
-  logout,
+  logoutController,
 } from "../controllers/authController";
 import { verifyToken } from "../libs/verifyToken";
 
@@ -13,8 +13,6 @@ router.post("/signup", signupController);
 
 router.post("/signin", signinController);
 
-router.get("/logout", logout);
-
-router.get("/me", verifyToken, getProfile);
+router.post("/logout", logoutController);
 
 export default router;

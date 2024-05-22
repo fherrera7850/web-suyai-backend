@@ -10,6 +10,7 @@ require('dotenv').config();
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 app.set("port", process.env.PORT || 5000);
 
@@ -17,9 +18,11 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3000' // Permite solicitudes solo desde esta URL
+    origin: 'http://localhost:3000',
+    credentials: true
 }));
-app.use(bodyParser.json()); // Asegúrate de usar body-parser para parsear JSON
+app.use(bodyParser.json()); // Body-parser para parsear JSON
+app.use(cookieParser());  // Cookies
 
 app.use(indexRoutes);
 app.use(authRoutes);

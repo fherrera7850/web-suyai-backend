@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export async function verifyToken(req, res, next) {
   // Get the token from the headers
-  const token = req.headers["x-access-token"];
+  let token = req.headers["x-access-token"] || req.cookies['token'];
 
   // if does not exists a token
   if (!token) {
